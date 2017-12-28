@@ -24,9 +24,10 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "ddcpci-ipc.h"
+#define IDLE_TIMEOUT 60
 
 #include "notebook.h"
+#include "internal.h"
 
 GtkWidget* table;
 
@@ -250,7 +251,8 @@ void set_message_ok(char* message, int with_ok)
 	}
 	
 	gtk_label_set_markup(GTK_LABEL(messagelabel), message);
-	
+	gtk_label_set_selectable(GTK_LABEL(messagelabel), TRUE);
+
 	widgets_set_sensitive(FALSE);
 	
 	gtk_widget_show(messagebox);
@@ -425,6 +427,8 @@ int main( int   argc, char *argv[] )
 	
 	g_timeout_add( IDLE_TIMEOUT*1000, heartbeat, NULL );
 	
+	gtk_window_set_default_icon_name ("gddccontrol");
+
 	main_app_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	
 	gtk_window_set_title(GTK_WINDOW(main_app_window),_("Monitor settings"));

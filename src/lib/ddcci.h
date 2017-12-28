@@ -21,19 +21,6 @@
 #ifndef DDCCI_H
 #define DDCCI_H
 
-#include "config.h"
-
-#ifdef HAVE_GETTEXT
-#include <libintl.h>
-#include <locale.h>
-#define _(String) gettext (String)
-#define gettext_noop(String) String
-#define N_(String) gettext_noop (String)
-#else
-#define _(String) String
-#define N_(String) String
-#endif
-
 #include <time.h>
 #include <sys/time.h>
 
@@ -63,6 +50,7 @@ struct caps {
 struct monitor {
 	int fd;
 	unsigned int addr;
+	int adl_adapter, adl_display;
 	char pnpid[8];
 	unsigned char digital; /* 0 - digital, 1 - analog */
 	struct timeval last;
@@ -73,9 +61,8 @@ struct monitor {
 	
 	enum {
 		dev
-#ifdef HAVE_DDCPCI
 		,pci
-#endif
+		,type_adl
 	} type;
 	int probing; /* are we probing? */
 	

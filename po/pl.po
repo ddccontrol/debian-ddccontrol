@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ddccontrol 0.4.2\n"
+"Project-Id-Version: ddccontrol 0.4.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-29 19:01+0800\n"
 "PO-Revision-Date: 2006-08-25 00:31+0200\n"
@@ -727,7 +727,7 @@ msgstr "Otwarcie urz±dzenia monitora (%s)..."
 
 #: ../src/gddccontrol/notebook.c:591
 msgid ""
-"An error occured while opening the monitor device.\n"
+"An error occurred while opening the monitor device.\n"
 "Maybe this monitor was disconnected, please click on the refresh button near "
 "the monitor list."
 msgstr ""
@@ -837,7 +837,7 @@ msgstr ""
 "Nie znaleziono konfiguracji monitora. Proszê najpierw uruchomiæ gddccontrol"
 
 #: ../src/gnome-ddcc-applet/ddcc-applet.c:395
-msgid "An error occured while opening the monitor device"
+msgid "An error occurred while opening the monitor device"
 msgstr "Wyst±pi³ b³±d podczas otwierania urz±dzenia monitora"
 
 #: ../src/gnome-ddcc-applet/ddcc-applet.c:400
@@ -1128,7 +1128,7 @@ msgid "Found I2C device (%s)\n"
 msgstr "Znaleziono urz±dzenie I2C (%s)\n"
 
 #: ../src/lib/ddcci.c:1206
-msgid "Error while getting informations about ddccontrol home directory."
+msgid "Error while getting information about ddccontrol home directory."
 msgstr "B³±d podczas pobierania informacji o katalogu domowym ddccontrol."
 
 #: ../src/lib/ddcci.c:1211
@@ -1137,7 +1137,7 @@ msgstr "B³±d podczas tworzenia katalogu domowego ddccontrol."
 
 #: ../src/lib/ddcci.c:1216
 msgid ""
-"Error while getting informations about ddccontrol home directory after "
+"Error while getting information about ddccontrol home directory after "
 "creating it."
 msgstr ""
 "B³±d podczas pobierania informacji o katalogu domowym ddccontrol po "
@@ -1149,7 +1149,7 @@ msgstr ""
 "B³±d: '.ddccontrol' w katalogu domowym u¿ytkownika nie jest katalogiem."
 
 #: ../src/lib/ddcci.c:1231
-msgid "Error while getting informations about ddccontrol profile directory."
+msgid "Error while getting information about ddccontrol profile directory."
 msgstr "B³±d podczas pobierania informacji o katalogu profili ddccontrol."
 
 #: ../src/lib/ddcci.c:1236
@@ -1158,7 +1158,7 @@ msgstr "B³±d podczas tworzenia katalogu profili ddccontrol."
 
 #: ../src/lib/ddcci.c:1241
 msgid ""
-"Error while getting informations about ddccontrol profile directory after "
+"Error while getting information about ddccontrol profile directory after "
 "creating it."
 msgstr ""
 "B³±d podczas pobierania informacji o katalogu profili ddccontrol po "

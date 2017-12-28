@@ -38,6 +38,8 @@
 #include <sys/stat.h>
 
 #include "ddcci.h"
+#include "internal.h"
+#include "amd_adl.h"
 
 #include "conf.h"
 
@@ -239,12 +241,22 @@ int ddcci_init(char* usedatadir)
 		printf(_("Failed to initialize ddccontrol database...\n"));
 		return 0;
 	}
+#ifdef HAVE_AMDADL
+	if (!amd_adl_init()){
+		if (verbosity) {
+			printf(_("Failed to initialize ADL...\n"));
+		}
+	}
+#endif
 	return ddcpci_init();
 }
 
 void ddcci_release() {
 	ddcpci_release();
 	ddcci_release_db();
+#ifdef HAVE_AMDADL
+	amd_adl_free();
+#endif
 }
 
 /* write len bytes (stored in buf) to i2c address addr */
@@ -263,7 +275,11 @@ static int i2c_write(struct monitor* mon, unsigned int addr, unsigned char *buf,
 		msg_rdwr.msgs = &i2cmsg;
 		msg_rdwr.nmsgs = 1;
 	
+#ifdef __FreeBSD__
+		i2cmsg.slave = addr << 1;
+#else
 		i2cmsg.addr  = addr;
+#endif
 		i2cmsg.flags = 0;
 		i2cmsg.len   = len;
 		i2cmsg.buf   = buf;
@@ -280,6 +296,10 @@ static int i2c_write(struct monitor* mon, unsigned int addr, unsigned char *buf,
 		if (verbosity > 1) {
 			dumphex(stderr, "Send", buf, len);
 		}
+
+#ifdef __FreeBSD__
+		i = len; // FreeBSD ioctl() returns 0
+#endif
 
 		return i;
 	}
@@ -318,6 +338,12 @@ static int i2c_write(struct monitor* mon, unsigned int addr, unsigned char *buf,
 		return adata.status;
 	}
 #endif
+#ifdef HAVE_AMDADL
+	case type_adl:
+	{
+		return amd_adl_i2c_write(mon->adl_adapter, mon->adl_display, addr, buf, len);
+	}
+#endif
 	default:
 		return -1;
 	}
@@ -338,7 +364,11 @@ static int i2c_read(struct monitor* mon, unsigned int addr, unsigned char *buf, 
 		msg_rdwr.msgs = &i2cmsg;
 		msg_rdwr.nmsgs = 1;
 	
+#ifdef __FreeBSD__
+		i2cmsg.slave = addr << 1;
+#else
 		i2cmsg.addr  = addr;
+#endif
 		i2cmsg.flags = I2C_M_RD;
 		i2cmsg.len   = len;
 		i2cmsg.buf   = buf;
@@ -355,6 +385,10 @@ static int i2c_read(struct monitor* mon, unsigned int addr, unsigned char *buf, 
 		if (verbosity > 1) {
 			dumphex(stderr, "Recv", buf, i);
 		}
+
+#ifdef __FreeBSD__
+		i = len; // FreeBSD ioctl() returns 0
+#endif
 
 		return i;
 	}
@@ -394,6 +428,12 @@ static int i2c_read(struct monitor* mon, unsigned int addr, unsigned char *buf, 
 		}
 
 		return ret - ANSWER_SIZE;
+	}
+#endif
+#ifdef HAVE_AMDADL
+	case type_adl:
+	{
+		return amd_adl_i2c_read(mon->adl_adapter, mon->adl_display, addr, buf, len);
 	}
 #endif
 	default:
@@ -582,7 +622,7 @@ int ddcci_readctrl(struct monitor* mon, unsigned char ctrl,
 
 /* See documentation Appendix D.
  * Returns :
- * -1 if an error occured 
+ * -1 if an error occurred 
  *  number of controls added
  *
  * add: if true: add caps_str to caps, otherwise remove caps_str from the caps.
@@ -596,7 +636,7 @@ int ddcci_parse_caps(const char* caps_str, struct caps* caps, int add)
 	int svcp = 0; /* Current CAPS section is vcp */
 	int stype = 0; /* Current CAPS section is type */
 	
-	char buf[8];
+	char buf[128];
 	char* endptr;
 	int ind = -1;
 	long val = -1;
@@ -929,6 +969,23 @@ static int ddcci_open_with_addr(struct monitor* mon, const char* filename, int a
 		mon->type = pci;
 	}
 #endif
+#ifdef HAVE_AMDADL
+	else if (strncmp(filename, "adl:", 4) == 0) {
+		mon->adl_adapter = -1;
+		mon->adl_display = -1;
+		if (sscanf(filename, "adl:%d:%d", &mon->adl_adapter, &mon->adl_display) != 2){
+			fprintf(stderr, _("Invalid filename (%s).\n"), filename);
+			return -3;
+		}
+
+		if (amd_adl_check_display(mon->adl_adapter, mon->adl_display)){
+			fprintf(stderr, _("ADL display not found (%s).\n"), filename);
+			return -3;
+		}
+
+		mon->type = type_adl;
+	}
+#endif
 	else {
 		fprintf(stderr, _("Invalid filename (%s).\n"), filename);
 		return -3;
@@ -1145,9 +1202,15 @@ struct monitorlist* ddcci_probe() {
 	
 	dirp = opendir("/dev/");
 	
+#ifdef __FreeBSD__
+	const char *prefix = "iic";
+#else
+	const char *prefix = "i2c-";
+#endif
+	int prefix_len = strlen(prefix);
 	while ((direntp = readdir(dirp)) != NULL)
 	{
-		if (!strncmp(direntp->d_name, "i2c-", 4))
+		if (!strncmp(direntp->d_name, prefix, prefix_len))
 		{
 			filename = malloc(strlen(direntp->d_name)+12);
 			
@@ -1167,6 +1230,28 @@ struct monitorlist* ddcci_probe() {
 	
 	closedir(dirp);
 	
+#ifdef HAVE_AMDADL
+	/* ADL probe */
+	int adl_disp;
+
+	for (adl_disp=0; adl_disp<amd_adl_get_displays_count(); adl_disp++){
+		int adapter, display;
+		if (amd_adl_get_display(adl_disp, &adapter, &display))
+		    break;
+
+			filename = malloc(64);
+			snprintf(filename, 64, "adl:%d:%d", adapter, display);
+			if (verbosity) {
+				printf(_("Found ADL display (%s)\n"), filename);
+			}
+			ddcci_probe_device(filename, &current, &last);
+			if (!verbosity) {
+				printf(".");
+				fflush(stdout);
+		}
+	}
+#endif
+
 	if (!verbosity)
 		printf("\n");
 	
@@ -1203,17 +1288,20 @@ int ddcci_create_config_dir()
 	
 	if (stat(filename, &buf) < 0) {
 		if (errno != ENOENT) {
-			perror(_("Error while getting informations about ddccontrol home directory."));
+			perror(_("Error while getting information about ddccontrol home directory."));
+			free(filename);
 			return 0;
 		}
 		
 		if (mkdir(filename, 0750) < 0) {
 			perror(_("Error while creating ddccontrol home directory."));
+			free(filename);
 			return 0;
 		}
 		
 		if (stat(filename, &buf) < 0) {
-			perror(_("Error while getting informations about ddccontrol home directory after creating it."));
+			perror(_("Error while getting information about ddccontrol home directory after creating it."));
+			free(filename);
 			return 0;
 		}
 	}
@@ -1221,6 +1309,7 @@ int ddcci_create_config_dir()
 	if (!S_ISDIR(buf.st_mode)) {
 		errno = ENOTDIR;
 		perror(_("Error: '.ddccontrol' in your home directory is not a directory."));
+		free(filename);
 		return 0;
 	}
 	
@@ -1228,17 +1317,20 @@ int ddcci_create_config_dir()
 	
 	if (stat(filename, &buf) < 0) {
 		if (errno != ENOENT) {
-			perror(_("Error while getting informations about ddccontrol profile directory."));
+			perror(_("Error while getting information about ddccontrol profile directory."));
+			free(filename);
 			return 0;
 		}
 		
 		if (mkdir(filename, 0750) < 0) {
 			perror(_("Error while creating ddccontrol profile directory."));
+			free(filename);
 			return 0;
 		}
 		
 		if (stat(filename, &buf) < 0) {
-			perror(_("Error while getting informations about ddccontrol profile directory after creating it."));
+			perror(_("Error while getting information about ddccontrol profile directory after creating it."));
+			free(filename);
 			return 0;
 		}
 	}
@@ -1246,6 +1338,7 @@ int ddcci_create_config_dir()
 	if (!S_ISDIR(buf.st_mode)) {
 		errno = ENOTDIR;
 		perror(_("Error: '.ddccontrol/profiles' in your home directory is not a directory."));
+		free(filename);
 		return 0;
 	}
 	

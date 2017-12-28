@@ -6,7 +6,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4.2\n"
+"Project-Id-Version: 0.4.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-28 04:48-0400\n"
 "PO-Revision-Date: 2007-1028 04:52-0400\n"
@@ -723,7 +723,7 @@ msgstr "Abriendo el dispositivo del monitor (%s)..."
 
 #: ../../po/../src/gddccontrol/notebook.c:591
 msgid ""
-"An error occured while opening the monitor device.\n"
+"An error occurred while opening the monitor device.\n"
 "Maybe this monitor was disconnected, please click on the refresh button near "
 "the monitor list."
 msgstr ""
@@ -832,7 +832,7 @@ msgid "No monitor configuration found. Please run gddccontrol first"
 msgstr "No se encontró configuración de monitor.  Por favor ejecute gddccontrol primero"
 
 #: ../../po/../src/gnome-ddcc-applet/ddcc-applet.c:395
-msgid "An error occured while opening the monitor device"
+msgid "An error occurred while opening the monitor device"
 msgstr "Ocurrió un error abriendo el dispositivo del monitor"
 
 #: ../../po/../src/gnome-ddcc-applet/ddcc-applet.c:400
@@ -1121,7 +1121,7 @@ msgid "Found I2C device (%s)\n"
 msgstr "Se encontró dispositivo I2C (%s)\n"
 
 #: ../../po/../src/lib/ddcci.c:1206
-msgid "Error while getting informations about ddccontrol home directory."
+msgid "Error while getting information about ddccontrol home directory."
 msgstr "Error obteniendo información sobre el directorio casero de ddccontrol."
 
 #: ../../po/../src/lib/ddcci.c:1211
@@ -1130,7 +1130,7 @@ msgstr "Error creando el directorio casero de ddccontrol."
 
 #: ../../po/../src/lib/ddcci.c:1216
 msgid ""
-"Error while getting informations about ddccontrol home directory after "
+"Error while getting information about ddccontrol home directory after "
 "creating it."
 msgstr ""
 "Error obteniendo información sobre el directorio casero de ddccontrol "
@@ -1141,7 +1141,7 @@ msgid "Error: '.ddccontrol' in your home directory is not a directory."
 msgstr "Error: '.ddccontro' en tu directorio casero no es un directorio."
 
 #: ../../po/../src/lib/ddcci.c:1231
-msgid "Error while getting informations about ddccontrol profile directory."
+msgid "Error while getting information about ddccontrol profile directory."
 msgstr "Error obteniendo información sobre el directorio de perfíl de ddccontrol."
 
 #: ../../po/../src/lib/ddcci.c:1236
@@ -1150,7 +1150,7 @@ msgstr "Error creando el directorio de perfíl de ddccontrol."
 
 #: ../../po/../src/lib/ddcci.c:1241
 msgid ""
-"Error while getting informations about ddccontrol profile directory after "
+"Error while getting information about ddccontrol profile directory after "
 "creating it."
 msgstr ""
 "Error obteniendo información sobre el directorio de perfíl de ddccontrol"

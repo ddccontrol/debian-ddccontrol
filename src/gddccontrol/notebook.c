@@ -29,6 +29,7 @@
 #include <math.h>
 
 #include "notebook.h"
+#include "internal.h"
 	
 #define GTK_FILL_EXPAND (GtkAttachOptions)(GTK_FILL|GTK_EXPAND)
 
@@ -588,7 +589,7 @@ void create_monitor_manager(struct monitorlist* monitor)
 	
 	if (ddcci_open(mon, monitor->filename, 0) < 0) {
 		set_message(_(
-			"An error occured while opening the monitor device.\n"
+			"An error occurred while opening the monitor device.\n"
 			"Maybe this monitor was disconnected, please click on "
 			"the refresh button near the monitor list."));
 		monitor_manager = NULL;
