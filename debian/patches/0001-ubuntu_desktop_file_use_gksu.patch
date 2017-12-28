@@ -10,9 +10,9 @@ Forwarded: no
 --- ddccontrol-0.4.2.orig/src/gddccontrol/gddccontrol.desktop.in
 +++ ddccontrol-0.4.2/src/gddccontrol/gddccontrol.desktop.in
 @@ -2,7 +2,7 @@
- Encoding=UTF-8
- Name=Monitor Settings
- Comment=Set your monitor preferences (contrast, brightness,...) and manage your profiles
+ _Name=DDC Control
+ _GenericName=Monitor Settings
+ _Comment=Set your monitor preferences (contrast, brightness,...) and manage your profiles
 -Exec=gddccontrol
 +Exec=gksu gddccontrol
  Icon=gddccontrol
