@@ -1,3 +1,65 @@
+ddccontrol (0.4.2-11) unstable; urgency=low
+
+  * QA upload.
+  * Link to libm. (Closes: #713540).
+  * Add patch to prevent buffer overrun. (Closes: #639932).
+  * Bump debhelper build-dep and compat to 9.
+    + Adds hardening flags.
+    + Patch for errors found by hardening flags.
+    + Make package multi-arch compliant.
+  * Bump Standards Version to 3.9.4.
+
+ -- Barry deFreese <bdefreese@debian.org>  Mon, 01 Jul 2013 16:58:49 -0400
+
+ddccontrol (0.4.2-10) unstable; urgency=low
+
+  * QA upload.
+  * Stop building the panel applet. Closes: #645565
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 17 Oct 2011 06:12:32 +0200
+
+ddccontrol (0.4.2-9) unstable; urgency=low
+
+  * QA upload.
+  * Switch to 3.0 (quilt) format.
+  * Reduce delta with Ubuntu to zero:
+    - Apply 0001-ubuntu_desktop_file_use_gksu.patch on Ubuntu:
+      + Use gksu in gddccontrol.desktop to get access to the DDC/CI device.
+    - Tune dh_gencontrol call to add gksu to gddccontrol's Depends field
+      when built on Ubuntu.
+  * Remove libddccontrol0.post{inst,rm} as debhelper does the job.
+  * debian/rules:
+    - Switch to DH7 pure-form format.
+    - Link with --as-needed.
+    - Strip wrong #include statement from /usr/include/ddccontrol/ddcci.h
+      Closes: #518083
+  * Bump Standards, required changes:
+    - Bump debian/compat to 7.
+    - debian/control:
+      + Add misc:Depends macros to the Depends fields.
+      + Fix description-synopsis-starts-with-article warning.
+      + Small improvements to the packages description.
+    - debian/rules: Remove dh_desktop call, it is deprecated.
+    - debian/watch: Remove dh-make template
+    - debian/copyright: Fix copyright-refers-to-symlink-license warning.
+
+ -- Alessio Treglia <alessio@debian.org>  Fri, 01 Jul 2011 14:39:06 +0200
+
+ddccontrol (0.4.2-8) unstable; urgency=low
+
+  * QA upload.
+  * Get rid of unneeded *.la files (Closes: #621216).
+
+ -- Alessio Treglia <alessio@debian.org>  Fri, 03 Jun 2011 10:59:33 +0200
+
+ddccontrol (0.4.2-7) unstable; urgency=low
+
+  * QA upload.
+    - Add armhf to architectures list. (Closes: DebianBug#604653)
+    - Bump standards version to 3.9.1 
+
+ -- Hector Oron <zumbi@debian.org>  Mon, 28 Mar 2011 17:21:18 +0000
+
 ddccontrol (0.4.2-6) unstable; urgency=low
 
   * Orphaning this package. Maintainer set to Debian QA Group.

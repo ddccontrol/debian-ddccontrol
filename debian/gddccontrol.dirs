@@ -1,6 +1,3 @@
 usr/bin
-usr/lib/ddccontrol
-usr/lib/bonobo/servers
 usr/share/applications
 usr/share/pixmaps
-usr/share/ddccontrol
