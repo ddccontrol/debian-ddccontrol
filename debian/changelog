@@ -1,3 +1,20 @@
+ddccontrol (0.4.3-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/compat: increased compatibility level to 10
+  * debian/control:
+    * updated homepage to GitHub
+    * updated VCS urls to GitHub
+    * increased debhelper dependency version to 10
+    * added build dependencies to build the release
+  * debian/ddccontrol.docs: use README.md
+  * debian/gddccontrol.install: install icons (moved from pixmaps)
+  * debian/libddccontrol-dev.install: don't install libs in this package
+  * debian/libddccontrol0.install: fixed patterns to match libs
+  * debian/rules: use autogen.sh
+
+ -- Miroslav Kravec <kravec.miroslav@gmail.com>  Fri, 29 Dec 2017 10:13:06 +0100
+
 ddccontrol (0.4.2-11) unstable; urgency=low
 
   * QA upload.
