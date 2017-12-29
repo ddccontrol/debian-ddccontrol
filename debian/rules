@@ -10,11 +10,13 @@ else
 endif
 
 %:
-	dh $@
+	dh $@ --with autoreconf
+
+override_dh_autoreconf:
+	./autogen.sh
 
 override_dh_auto_configure:
-	./autogen.sh
-	./configure --prefix=/usr/ --enable-doc
+	dh_auto_configure -- --enable-doc
 
 override_dh_auto_test:
 
