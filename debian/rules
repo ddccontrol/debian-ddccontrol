@@ -10,7 +10,11 @@ else
 endif
 
 %:
-	dh $@ --with autotools_dev
+	dh $@
+
+override_dh_auto_configure:
+	./autogen.sh
+	./configure --prefix=/usr/ --enable-doc
 
 override_dh_auto_test:
 
