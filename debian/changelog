@@ -8,9 +8,12 @@ ddccontrol (0.4.3-1) unstable; urgency=low
     * increased debhelper dependency version to 10
     * added build dependencies to build the release
   * debian/ddccontrol.docs: use README.md
+  * debian/gddccontrol.dirs: install icons folder
   * debian/gddccontrol.install: install icons (moved from pixmaps)
-  * debian/libddccontrol-dev.install: don't install '.so' libs in this package
-  * debian/libddccontrol0.install: install all '.so' libs
+  * debian/gddccontrol.menu: removed, because there is .desktop file
+  * debian/libddccontrol0.postinst: removed, ldconfig called by trigger
+  * debian/libddccontrol0.postrm: removed, ldconfig called by trigger
+  * debian/libddccontrol0.triggers: added ldconfig trigger
   * debian/rules: use autogen.sh
 
  -- Miroslav Kravec <kravec.miroslav@gmail.com>  Fri, 29 Dec 2017 11:10:25 +0100
