@@ -1,2 +1,7 @@
+# Compulsory line, this is a version 3 file
 version=3
-http://sf.net/ddccontrol/ddccontrol-([^d]*)\.tar\.bz2
+
+# GitHub hosted project
+opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%ddccontrol-$1.tar.gz%" \
+   https://github.com/ddccontrol/ddccontrol/releases \
+   (?:.*?/)?v?(\d[\d.]*)\.tar\.gz debian uupdate

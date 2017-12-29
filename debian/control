@@ -1,9 +1,9 @@
 Source: ddccontrol
 Section: utils
 Priority: optional
-Maintainer: Debian QA Group <packages@qa.debian.org>
-Homepage: http://ddccontrol.sourceforge.net/
-Build-Depends: debhelper (>= 9),
+Maintainer: Miroslav Kravec <kravec.miroslav@gmail.com>
+Homepage: https://github.com/ddccontrol/ddccontrol
+Build-Depends: debhelper (>= 10),
  autotools-dev,
  libpci-dev,
  intltool,
@@ -13,10 +13,11 @@ Build-Depends: debhelper (>= 9),
  xml-core,
  xsltproc,
  tidy,
- zlib1g-dev
-Standards-Version: 3.9.4
-Vcs-Browser: http://ddccontrol.svn.sourceforge.net/viewvc/ddccontrol/
-Vcs-Svn: https://ddccontrol.svn.sourceforge.net/svnroot/ddccontrol
+ zlib1g-dev,
+ docbook-xsl
+Standards-Version: 4.1.1
+Vcs-Git: https://github.com/ddccontrol/debian-ddccontrol.git
+Vcs-Browser: https://github.com/ddccontrol/debian-ddccontrol
 
 Package: gddccontrol
 Architecture: i386 amd64 ia64 alpha arm armel armhf
