@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Miroslav Kravec <kravec.miroslav@gmail.com>
 Homepage: https://github.com/ddccontrol/ddccontrol
 Build-Depends: debhelper (>= 10),
- autotools-dev,
  libpci-dev,
  intltool,
  libxml2-dev,
@@ -15,7 +14,7 @@ Build-Depends: debhelper (>= 10),
  tidy,
  zlib1g-dev,
  docbook-xsl
-Standards-Version: 4.1.1
+Standards-Version: 4.1.2
 Vcs-Git: https://github.com/ddccontrol/debian-ddccontrol.git
 Vcs-Browser: https://github.com/ddccontrol/debian-ddccontrol
 
