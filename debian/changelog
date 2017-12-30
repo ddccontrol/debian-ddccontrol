@@ -11,12 +11,13 @@ ddccontrol (0.4.3-1) unstable; urgency=low
   * debian/gddccontrol.dirs: install icons folder
   * debian/gddccontrol.install: install icons (moved from pixmaps)
   * debian/gddccontrol.menu: removed, because there is .desktop file
-  * debian/libddccontrol0.postinst: removed, ldconfig called by trigger
-  * debian/libddccontrol0.postrm: removed, ldconfig called by trigger
-  * debian/libddccontrol0.triggers: added ldconfig trigger
+  * debian/libddccontrol0.postinst: removed, because ldconfig is called by
+    trigger added by dh_makeshlibs/11
+  * debian/libddccontrol0.postrm: removed, because ldconfig is called by
+    trigger added by dh_makeshlibs/11
   * debian/rules: use autogen.sh, and enable-doc at configure
 
- -- Miroslav Kravec <kravec.miroslav@gmail.com>  Fri, 29 Dec 2017 12:23:28 +0100
+ -- Miroslav Kravec <kravec.miroslav@gmail.com>  Sat, 30 Dec 2017 11:56:57 +0100
 
 ddccontrol (0.4.2-11) unstable; urgency=low
 
