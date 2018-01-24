@@ -1,23 +1,23 @@
 ddccontrol (0.4.3-1) unstable; urgency=low
 
   * New upstream release
-  * debian/compat: increased compatibility level to 10
+  * debian/compat: increased compatibility level to 11
   * debian/control:
     * updated homepage to GitHub
     * updated VCS urls to GitHub
-    * increased debhelper dependency version to 10
+    * increased debhelper dependency version to 11
     * added build dependencies to build the release
   * debian/ddccontrol.docs: use README.md
   * debian/gddccontrol.dirs: install icons folder
   * debian/gddccontrol.install: install icons (moved from pixmaps)
   * debian/gddccontrol.menu: removed, because there is .desktop file
   * debian/libddccontrol0.postinst: removed, because ldconfig is called by
-    trigger added by dh_makeshlibs/11
+    trigger added by dh_makeshlibs
   * debian/libddccontrol0.postrm: removed, because ldconfig is called by
-    trigger added by dh_makeshlibs/11
+    trigger added by dh_makeshlibs
   * debian/rules: use autogen.sh, and enable-doc at configure
 
- -- Miroslav Kravec <kravec.miroslav@gmail.com>  Sat, 30 Dec 2017 11:56:57 +0100
+ -- Miroslav Kravec <kravec.miroslav@gmail.com>  Wed, 24 Jan 2018 12:29:47 +0100
 
 ddccontrol (0.4.2-11) unstable; urgency=low
 

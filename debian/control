@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Miroslav Kravec <kravec.miroslav@gmail.com>
 Homepage: https://github.com/ddccontrol/ddccontrol
-Build-Depends: debhelper (>= 10),
+Build-Depends: debhelper (>= 11),
  libpci-dev,
  intltool,
  libxml2-dev,
