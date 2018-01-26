@@ -8,6 +8,8 @@ ddccontrol (0.4.3-1) unstable; urgency=low
     * increased debhelper dependency version to 11
     * added build dependencies to build the release
   * debian/ddccontrol.docs: use README.md
+  * debian/ddccontrol.lintian-overrides, debian/lintian-overrides: removed,
+    because it should be fixed, not suppressed warning
   * debian/gddccontrol.dirs: install icons folder
   * debian/gddccontrol.install: install icons (moved from pixmaps)
   * debian/gddccontrol.menu: removed, because there is .desktop file
@@ -17,7 +19,7 @@ ddccontrol (0.4.3-1) unstable; urgency=low
     trigger added by dh_makeshlibs
   * debian/rules: use autogen.sh, and enable-doc at configure
 
- -- Miroslav Kravec <kravec.miroslav@gmail.com>  Wed, 24 Jan 2018 12:29:47 +0100
+ -- Miroslav Kravec <kravec.miroslav@gmail.com>  Fri, 26 Jan 2018 10:54:34 +0100
 
 ddccontrol (0.4.2-11) unstable; urgency=low
 
