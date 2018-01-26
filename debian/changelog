@@ -7,6 +7,7 @@ ddccontrol (0.4.3-1) unstable; urgency=low
     * updated VCS urls to GitHub
     * increased debhelper dependency version to 11
     * added build dependencies to build the release
+    * adopt the package (Closes: #483479)
   * debian/ddccontrol.docs: use README.md
   * debian/ddccontrol.lintian-overrides, debian/lintian-overrides: removed,
     because it should be fixed, not suppressed warning
