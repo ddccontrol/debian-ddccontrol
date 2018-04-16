@@ -1,3 +1,11 @@
+ddccontrol (0.4.3-2) UNRELEASED; urgency=medium
+
+  * Restore changes from 0.4.2-12:
+    - Drop Ubuntu-specific gksu dependency and patch (Closes: #894175)
+    - Drop obsolete dirs files
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sun, 15 Apr 2018 20:27:19 -0400
+
 ddccontrol (0.4.3-1) unstable; urgency=low
 
   * New upstream release
@@ -21,6 +29,16 @@ ddccontrol (0.4.3-1) unstable; urgency=low
   * debian/rules: use autogen.sh, and enable-doc at configure
 
  -- Miroslav Kravec <kravec.miroslav@gmail.com>  Fri, 26 Jan 2018 10:54:34 +0100
+
+ddccontrol (0.4.2-12) unstable; urgency=medium
+
+  * QA upload.
+  * Drop Ubuntu-specific gksu dependency and patch. gksu will be removed
+    from Debian and Ubuntu soon.
+  * Bump debhelper compat to 10
+  * Drop obsolete menu files since a .desktop is provided
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 30 Dec 2017 12:27:20 -0500
 
 ddccontrol (0.4.2-11) unstable; urgency=low
 
