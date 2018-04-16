@@ -3,12 +3,6 @@
 LDFLAGS+=-Wl,--as-needed
 export LIBS=-lm
 
-ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
-	SUBSTVARS = -Vdist:Depends="gksu"
-else
-	SUBSTVARS = -Vdist:Depends=""
-endif
-
 %:
 	dh $@ --with autoreconf
 
@@ -19,9 +13,6 @@ override_dh_auto_configure:
 	dh_auto_configure -- --enable-doc
 
 override_dh_auto_test:
-
-override_dh_gencontrol:
-	dh_gencontrol -- $(SUBSTVARS)
 
 override_dh_install:
 	dh_install -plibddccontrol-dev
