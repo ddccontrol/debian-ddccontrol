@@ -1,0 +1,65 @@
+From: Miroslav Kravec <kravec.miroslav@gmail.com>
+Date: Fri, 20 Apr 2018 19:50:41 +0200
+Subject: use pkexec for gddccontrol
+
+---
+ src/gddccontrol/Makefile.am                         |  3 +++
+ src/gddccontrol/gddccontrol.desktop.in              |  2 +-
+ .../org.ddccontrol.pkexec.gddccontrol.policy        | 21 +++++++++++++++++++++
+ 3 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 src/gddccontrol/org.ddccontrol.pkexec.gddccontrol.policy
+
+diff --git a/src/gddccontrol/Makefile.am b/src/gddccontrol/Makefile.am
+index ca30f4c..c5359d2 100644
+--- a/src/gddccontrol/Makefile.am
++++ b/src/gddccontrol/Makefile.am
+@@ -16,6 +16,9 @@ desktop_in_files = gddccontrol.desktop.in
+ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+ @INTLTOOL_DESKTOP_RULE@
+ 
++policykitdir = $(datadir)/polkit-1/actions
++policykit_DATA = org.ddccontrol.pkexec.gddccontrol.policy
++
+ icondir = $(datadir)/icons/hicolor/48x48/apps
+ icon_DATA = gddccontrol.png
+ 
+diff --git a/src/gddccontrol/gddccontrol.desktop.in b/src/gddccontrol/gddccontrol.desktop.in
+index 721c6a6..9d93c70 100644
+--- a/src/gddccontrol/gddccontrol.desktop.in
++++ b/src/gddccontrol/gddccontrol.desktop.in
+@@ -2,7 +2,7 @@
+ _Name=DDC Control
+ _GenericName=Monitor Settings
+ _Comment=Set your monitor preferences (contrast, brightness,...) and manage your profiles
+-Exec=gddccontrol
++Exec=pkexec gddccontrol
+ Icon=gddccontrol
+ Terminal=false
+ Type=Application
+diff --git a/src/gddccontrol/org.ddccontrol.pkexec.gddccontrol.policy b/src/gddccontrol/org.ddccontrol.pkexec.gddccontrol.policy
+new file mode 100644
+index 0000000..9d516b2
+--- /dev/null
++++ b/src/gddccontrol/org.ddccontrol.pkexec.gddccontrol.policy
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE policyconfig PUBLIC
++ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
++ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
++<policyconfig>
++  <vendor>DDCcontrol</vendor>
++  <vendor_url>http://ddccontrol.sourceforge.net/</vendor_url>
++
++  <action id="org.ddccontrol.pkexec.gddccontrol">
++    <message>Authentication is required to run the Monitor Settings</message>
++    <icon_name>gddccontrol</icon_name>
++    <defaults>
++      <allow_any>no</allow_any>
++      <allow_inactive>no</allow_inactive>
++      <allow_active>yes</allow_active>
++    </defaults>
++    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/gddccontrol</annotate>
++    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
++  </action>
++
++</policyconfig>
