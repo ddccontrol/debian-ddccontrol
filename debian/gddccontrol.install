@@ -2,3 +2,4 @@ usr/bin/gddccontrol
 usr/share/applications/*
 usr/share/icons/*
 usr/share/man/man1/gddccontrol.1
+usr/share/polkit-1/actions/org.ddccontrol.pkexec.gddccontrol.policy
