@@ -1,0 +1,32 @@
+From: Miroslav Kravec <kravec.miroslav@gmail.com>
+Date: Fri, 20 Apr 2018 20:10:57 +0200
+Subject: load i2c-dev module at boot
+
+---
+ src/lib/Makefile.am             | 3 +++
+ src/lib/ddccontrol-i2c-dev.conf | 2 ++
+ 2 files changed, 5 insertions(+)
+ create mode 100644 src/lib/ddccontrol-i2c-dev.conf
+
+diff --git a/src/lib/Makefile.am b/src/lib/Makefile.am
+index daa2795..1887347 100644
+--- a/src/lib/Makefile.am
++++ b/src/lib/Makefile.am
+@@ -8,6 +8,9 @@ pkgconfig_DATA = ddccontrol.pc
+ 
+ $(pkgconfig_DATA): $(srcdir)/ddccontrol.pc.in $(top_builddir)/config.status
+ 
++modulesdir = /etc/modules-load.d/
++modules_DATA = ddccontrol-i2c-dev.conf
++
+ lib_LTLIBRARIES = libddccontrol.la
+ 
+ libddccontrol_la_SOURCES = ddcci.c ddcci.h monitor_db.c monitor_db.h \
+diff --git a/src/lib/ddccontrol-i2c-dev.conf b/src/lib/ddccontrol-i2c-dev.conf
+new file mode 100644
+index 0000000..2ea582e
+--- /dev/null
++++ b/src/lib/ddccontrol-i2c-dev.conf
+@@ -0,0 +1,2 @@
++# Load i2c-dev at boot to probe DDC/CI devices (displays)
++i2c-dev
