@@ -6,6 +6,7 @@ ddccontrol (0.4.3-2) UNRELEASED; urgency=medium
     - Drop obsolete dirs files
 
   [ Miroslav Kravec ]
+  * Add dependency to policykit to gddccontrol
   * Add patch to use policykit to launch gddccontrol via desktop
   * Add patch to load i2c-dev module at boot
 
