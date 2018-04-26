@@ -1,0 +1,2 @@
+# pkexec is available as dependency
+gddccontrol: desktop-command-not-in-package usr/share/applications/gddccontrol.desktop pkexec
