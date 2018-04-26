@@ -1,4 +1,4 @@
-ddccontrol (0.4.4-1) UNRELEASED; urgency=medium
+ddccontrol (0.4.4-1) unstable; urgency=medium
 
   * New upstream release (Closes: #888015)
   * debian/ddccontrol.install, debian/libddccontrol0.install:
@@ -10,7 +10,7 @@ ddccontrol (0.4.4-1) UNRELEASED; urgency=medium
   * debian/control: bump standards version to 4.1.4
   * debian/rules: enable bindnow hardening, fixes lintian hardening-no-bindnow
 
- -- Miroslav Kravec <kravec.miroslav@gmail.com>  Thu, 26 Apr 2018 19:27:41 +0200
+ -- Miroslav Kravec <kravec.miroslav@gmail.com>  Thu, 26 Apr 2018 20:16:18 +0200
 
 ddccontrol (0.4.3-2) unstable; urgency=medium
 
