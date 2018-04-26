@@ -14,7 +14,7 @@ Build-Depends: debhelper (>= 11),
  tidy,
  zlib1g-dev,
  docbook-xsl
-Standards-Version: 4.1.2
+Standards-Version: 4.1.4
 Vcs-Git: https://github.com/ddccontrol/debian-ddccontrol.git
 Vcs-Browser: https://github.com/ddccontrol/debian-ddccontrol
 
