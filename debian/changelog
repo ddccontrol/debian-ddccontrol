@@ -8,6 +8,7 @@ ddccontrol (0.4.4-1) UNRELEASED; urgency=medium
     desktop-command-not-in-package
   * debian/changelog, debian/control: fix file-contains-trailing-whitespace
   * debian/control: bump standards version to 4.1.4
+  * debian/rules: enable bindnow hardening, fixes lintian hardening-no-bindnow
 
  -- Miroslav Kravec <kravec.miroslav@gmail.com>  Thu, 26 Apr 2018 19:27:41 +0200
 
