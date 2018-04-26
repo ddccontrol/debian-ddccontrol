@@ -1,6 +1,9 @@
 ddccontrol (0.4.4-1) UNRELEASED; urgency=medium
 
   * New upstream release
+  * debian/ddccontrol.install, debian/libddccontrol0.install:
+    update location of ddcpci binary (fixes binary-without-manpage),
+    install with library (ddcpci is used by the library)
 
  -- Miroslav Kravec <kravec.miroslav@gmail.com>  Thu, 26 Apr 2018 19:27:41 +0200
 

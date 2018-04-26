@@ -1,2 +1,3 @@
 etc/modules-load.d/ddccontrol-i2c-dev.conf
 usr/lib/*/lib*.so.*
+usr/lib/*/ddccontrol/*
