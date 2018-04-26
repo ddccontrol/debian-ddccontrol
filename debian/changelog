@@ -6,6 +6,7 @@ ddccontrol (0.4.4-1) UNRELEASED; urgency=medium
     install with library (ddcpci is used by the library)
   * debian/gddccontrol.lintian-overrides: add override for
     desktop-command-not-in-package
+  * debian/changelog, debian/control: fix file-contains-trailing-whitespace
 
  -- Miroslav Kravec <kravec.miroslav@gmail.com>  Thu, 26 Apr 2018 19:27:41 +0200
 
@@ -116,7 +117,7 @@ ddccontrol (0.4.2-7) unstable; urgency=low
 
   * QA upload.
     - Add armhf to architectures list. (Closes: DebianBug#604653)
-    - Bump standards version to 3.9.1 
+    - Bump standards version to 3.9.1
 
  -- Hector Oron <zumbi@debian.org>  Mon, 28 Mar 2011 17:21:18 +0000
 
