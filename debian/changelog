@@ -1,3 +1,9 @@
+ddccontrol (0.4.4-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+
+ -- Miroslav Kravec <kravec.miroslav@gmail.com>  Thu, 26 Apr 2018 19:27:41 +0200
+
 ddccontrol (0.4.3-2) unstable; urgency=medium
 
   [ Jeremy Bicha ]
