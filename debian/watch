@@ -1,2 +1,5 @@
-version=4
-https://github.com/@PACKAGE@/@PACKAGE@/tags .*/v?@ANY_VERSION@@ARCHIVE_EXT@
+Version: 5
+
+Template: Github
+Owner: @PACKAGE@
+Project: @PACKAGE@

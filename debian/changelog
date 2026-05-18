@@ -1,3 +1,12 @@
+ddccontrol (2.0.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * GTK2 → GTK3 (build-dep: libgtk2.0-dev → libgtk-3-dev)
+  * Add arm64 to Architecture
+  * Update policy and target architectures
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Mon, 18 May 2026 17:31:31 +0100
+
 ddccontrol (1.0.3-1) unstable; urgency=medium
 
   * New upstream relaese
