@@ -1,6 +1,8 @@
 *.la
 *.lo
 *.o
+*.orig
+.dirstamp
 .deps/
 .libs/
 /ABOUT-NLS
@@ -58,3 +60,6 @@ Makefile
 Makefile.in
 
 /scripts/tmp
+configure~
+po/Makefile.in.in~
+src/config.h.in~

@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: build (${{ matrix.arch }}, ${{ matrix.compiler }})
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
+    container:
+      image: ghcr.io/ddccontrol/ddccontrol-ci:latest
+    strategy:
+      matrix:
+        arch: [amd64, arm64]
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set compiler
+        run: |
+          if [ "${{ matrix.compiler }}" = "clang" ]; then
+            echo "CC=clang" >> $GITHUB_ENV
+          else
+            echo "CC=gcc" >> $GITHUB_ENV
+          fi
+
+      - name: Build
+        run: |
+          ./autogen.sh
+          ./configure CFLAGS="$CFLAGS"
+          make -j$(nproc)
+
+      - name: Format code check
+        run: ./scripts/format_code.sh
+
+      - name: Clean up formatted files
+        run: find -name "*.orig" -exec rm -v {} \;
+
+      - name: Post-build checks
+        run: ./scripts/travis_ci_after_build_checks.sh
