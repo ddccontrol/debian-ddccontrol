@@ -19,7 +19,7 @@ Vcs-Git: https://salsa.debian.org/debian/ddccontrol.git
 Vcs-Browser: https://salsa.debian.org/debian/ddccontrol
 
 Package: gddccontrol
-Architecture: i386 amd64 ia64 alpha arm armel armhf arm64 loong64
+Architecture: any
 Depends: ddccontrol (= ${binary:Version}),
  ${shlibs:Depends},
  ${misc:Depends}
@@ -32,7 +32,7 @@ Description: program to control monitor parameters (graphical interface)
  This package provides a graphical user interface.
 
 Package: ddccontrol
-Architecture: i386 amd64 ia64 alpha arm armel armhf arm64 loong64
+Architecture: any
 Depends: ddccontrol-db,
  ${shlibs:Depends},
  ${misc:Depends}
@@ -43,7 +43,7 @@ Description: program to control monitor parameters
 
 Package: libddccontrol-dev
 Section: libdevel
-Architecture: i386 amd64 ia64 alpha arm armel armhf arm64 loong64
+Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libddccontrol0 (= ${binary:Version}),
