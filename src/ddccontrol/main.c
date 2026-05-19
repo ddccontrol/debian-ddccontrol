@@ -112,15 +112,31 @@ static void check_integrity(char *datadir, char *pnpname)
 	printf(_("[ OK ]\n"));
 
 	/* Create caps with all controls. */
-	char buf2[4];
-	char buffer[256 * 3 + 25];
-	strcpy(buffer, "(vcp(");
+	char buffer[sizeof("(vcp(") + (3 * 256) + sizeof("))")];
+	int pos = snprintf(buffer, sizeof(buffer), "(vcp(");
+	if (pos < 0 || (size_t)pos >= sizeof(buffer)) {
+		fprintf(stderr, "Failed to build monitor capability buffer.\n");
+		ddcci_release_db();
+		exit(1);
+	}
 	int i;
 	for (i = 0; i < 256; i++) {
-		snprintf(buf2, 4, "%02x ", i);
-		strcat(buffer, buf2);
+		int n = snprintf(buffer + pos, sizeof(buffer) - (size_t)pos, "%02x ", i);
+		if (n < 0 || (size_t)n >= sizeof(buffer) - (size_t)pos) {
+			fprintf(stderr, "Failed to build monitor capability buffer.\n");
+			ddcci_release_db();
+			exit(1);
+		}
+		pos += n;
 	}
-	strcat(buffer, "))");
+	{
+		int n = snprintf(buffer + pos, sizeof(buffer) - (size_t)pos, "))");
+		if (n < 0 || (size_t)n >= sizeof(buffer) - (size_t)pos) {
+			fprintf(stderr, "Failed to build monitor capability buffer.\n");
+			ddcci_release_db();
+			exit(1);
+		}
+	}
 
 	struct caps caps;
 	ddcci_parse_caps(buffer, &caps, 1);
@@ -319,9 +335,16 @@ int main(int argc, char **argv)
 
 			if ((!fn) && (current->supported)) {
 				printf(_("  (Automatically selected)\n"));
-				fn = malloc(strlen(current->filename) + 1);
-				strcpy(fn, current->filename);
+				fn = strdup(current->filename);
 				selected_monitor_name = strdup(current->name);
+				if (!fn || !selected_monitor_name) {
+					fprintf(stderr, _("Memory allocation failed\n"));
+					free(fn);
+					free(selected_monitor_name);
+					ddcci_free_list(monlist);
+					ddcci_release();
+					exit(1);
+				}
 				report.monitor_name = selected_monitor_name;
 			}
 			current = current->next;
@@ -332,6 +355,9 @@ int main(int argc, char **argv)
 			fprintf(stderr, _(
 			            "No monitor supporting DDC/CI available.\n"
 			            "If your graphics card need it, please check all the required kernel modules are loaded (i2c-dev, and your framebuffer driver).\n"
+			            "On many laptops, the internal eDP/LVDS panel does not expose DDC/CI, so only external monitors may work.\n"
+			            "For support, please include output from:\n"
+			            "LANG=C LC_ALL=C ddccontrol -p -c -d\n"
 			        ));
 			ddcci_release();
 			exit(0);
@@ -356,6 +382,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, _(
 		            "\nDDC/CI at %s is unusable (%d).\n"
 		            "If your graphics card need it, please check all the required kernel modules are loaded (i2c-dev, and your framebuffer driver).\n"
+		            "If this is a laptop internal display, please note many eDP/LVDS panels do not support DDC/CI.\n"
 		        ), fn, ret);
 	} else {
 		fprintf(stdout, _("\nEDID readings:\n"));
